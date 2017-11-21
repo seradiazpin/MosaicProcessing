@@ -23,6 +23,10 @@ void draw() {
    rect(rectX, rectY, 300, 50);
    fill(0, 102, 153);
    text("Colocar pieza aleatorea",rectX+25, rectY+30);
+   fill(255);
+   rect(rectX, rectY+300, 300, 50);
+   fill(0, 102, 153);
+   text("Guardar",rectX+25, rectY+330);
    if(loadcomplete){
      drawGrid();
    } 
@@ -60,6 +64,15 @@ void setupGrid(int widthCan, int heightCan) {
   }
 }
 
+
+  void keyPressed() {
+  if (key == CODED) {
+  Position ran = dgm.getRandom();
+  if (ran.x != -1) {
+     colors[ran.x][ran.y] = dibujarImagenes();
+  }
+  }
+  }
  
 void drawGrid() {
   fill(255);
@@ -83,6 +96,10 @@ void drawGrid() {
 
 void mousePressed() {
    Position ran = dgm.getRandom(); //<>//
+   if(overRect(rectX, rectY+300, 300, 50)){
+     PImage partialSave = get(0,0,width-400,height);
+      partialSave.save("partialSave.jpg");
+   }
    if (overRect(rectX, rectY, 300, 50) && ran.x != -1) {
      colors[ran.x][ran.y] = dibujarImagenes();
   }else{

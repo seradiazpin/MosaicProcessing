@@ -14,10 +14,13 @@ class DibujadorGM{
   }
   public  void listFilesForFolder(final File folder) {
     for (final File fileEntry : folder.listFiles()) {
-        if (fileEntry.isDirectory()) {
+        if (fileEntry.isDirectory() && !fileEntry.getName().contains(".DS_Store")) {
             listFilesForFolder(fileEntry);
         } else {
+          System.out.println(fileEntry.getAbsolutePath());
+          if(!fileEntry.getName().contains(".DS_Store")){
             images.add(loadImage(fileEntry.getAbsolutePath()));
+          }
         }
     }
   }
